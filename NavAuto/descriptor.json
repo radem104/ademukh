@@ -1,0 +1,20 @@
+﻿{
+  "Descriptor": {
+    "UId": "a6314612-943f-2058-224f-7c4cea315424",
+    "Name": "NavAuto",
+    "ModifiedOnUtc": "\/Date(1694789852000)\/",
+    "Maintainer": "Customer",
+    "DependsOn": [
+      {
+        "UId": "78ae52a2-7d50-48a5-9d4e-9cbec55c3d67",
+        "PackageVersion": "7.8.0",
+        "Name": "MarketingSoftkeyEnu"
+      },
+      {
+        "UId": "d903a704-65c0-4967-b0bf-3e10bfbe5f23",
+        "PackageVersion": "7.8.0",
+        "Name": "SalesEnterprise_Marketing_CustomerCenter"
+      }
+    ]
+  }
+}
