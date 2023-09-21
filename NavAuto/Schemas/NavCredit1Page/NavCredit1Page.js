@@ -13,8 +13,80 @@ define("NavCredit1Page", [], function() {
 				}
 			}
 		}/**SCHEMA_DETAILS*/,
-		businessRules: /**SCHEMA_BUSINESS_RULES*/{}/**SCHEMA_BUSINESS_RULES*/,
-		methods: {},
+		businessRules: /**SCHEMA_BUSINESS_RULES*/{
+			"Timeline": {
+				"aa2aad49-5b0d-492c-9bfd-4f3f419e1565": {
+					"uId": "aa2aad49-5b0d-492c-9bfd-4f3f419e1565",
+					"enabled": true,
+					"removed": false,
+					"ruleType": 0,
+					"property": 0,
+					"logical": 0,
+					"conditions": [
+						{
+							"comparisonType": 5,
+							"leftExpression": {
+								"type": 1,
+								"attribute": "NavDateStart"
+							},
+							"rightExpression": {
+								"type": 1,
+								"attribute": "NavDateEnd"
+							}
+						},
+						{
+							"comparisonType": 3,
+							"leftExpression": {
+								"type": 1,
+								"attribute": "NavDateStart"
+							},
+							"rightExpression": {
+								"type": 1,
+								"attribute": "NavDateEnd"
+							}
+						}
+					]
+				}
+			}
+		}/**SCHEMA_BUSINESS_RULES*/,
+		methods: {
+			checkingField: function(name){
+				var invalidMessage = "";
+				var value = this.get(name);
+				if (Ext.isEmpty(value)) {
+                   
+                    invalidMessage = this.get("Resources.Strings.MessageField");
+                }   
+				return {                 
+					invalidMessage: invalidMessage
+				};
+			},
+            dueDateValidator: function() {
+                
+                var invalidMessage = "";
+                var dateDiff = new Date(2015, 10, 10) - new Date(2014, 10, 10);    
+                if ((this.get("NavDateEnd") - this.get("NavDateStart")) < dateDiff) {
+                   
+                    invalidMessage = this.get("Resources.Strings.CreatedOnLessDueDateMessage");
+                }
+                
+                return {
+                    
+                    invalidMessage: invalidMessage
+                };
+            },
+           
+            setValidationConfig: function() {
+              
+                this.callParent(arguments);
+              
+                this.addColumnValidator("NavDateEnd", this.dueDateValidator);           
+                this.addColumnValidator("NavDateStart", this.dueDateValidator);
+				this.addColumnValidator("Name", function() {return this.checkingField("Name")});           
+                this.addColumnValidator("NavDateEnd", function() {return this.checkingField("NavDateEnd")});
+				this.addColumnValidator("NavDateStart",function() {return this.checkingField("NavDateStart")});
+				this.addColumnValidator("NavRatePerMonth", function() {return this.checkingField("NavRatePerMonth")});
+            }},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
 			{
