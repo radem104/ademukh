@@ -108,6 +108,30 @@ define("NavInvoice1Page", [], function() {
 							}
 						}
 					]
+				},
+				"3bd9cbda-adda-4a96-8532-411797ca1559": {
+					"uId": "3bd9cbda-adda-4a96-8532-411797ca1559",
+					"enabled": true,
+					"removed": false,
+					"ruleType": 3,
+					"populatingAttributeSource": {
+						"expression": {
+							"type": 1,
+							"attribute": "NavAgreement",
+							"attributePath": "NavSumma"
+						}
+					},
+					"logical": 0,
+					"conditions": [
+						{
+							"comparisonType": 1,
+							"leftExpression": {
+								"type": 1,
+								"attribute": "NavAgreement",
+								"attributePath": "NavCredit"
+							}
+						}
+					]
 				}
 			}
 		}/**SCHEMA_BUSINESS_RULES*/,

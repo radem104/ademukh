@@ -11,6 +11,14 @@ define("NavAuto1Page", ["ext-base"], function(Ext) {
 					"masterColumn": "Id",
 					"detailColumn": "NavAuto"
 				}
+			},
+			"NavSchemaModel": {
+				"schemaName": "NavSchema077dbdb7Detail",
+				"entitySchemaName": "NavModel",
+				"filter": {
+					"detailColumn": "NavBrand",
+					"masterColumn": "Id"
+				}
 			}
 		}/**SCHEMA_DETAILS*/,
 		businessRules: /**SCHEMA_BUSINESS_RULES*/{
@@ -274,6 +282,17 @@ define("NavAuto1Page", ["ext-base"], function(Ext) {
 				"values": {
 					"order": 0
 				}
+			},
+			{
+				"operation": "insert",
+				"name": "NavSchemaModel",
+				"values": {
+					"itemType": 2,
+					"markerValue": "added-detail"
+				},
+				"parentName": "ESNTab",
+				"propertyName": "items",
+				"index": 1
 			}
 		]/**SCHEMA_DIFF*/
 	};

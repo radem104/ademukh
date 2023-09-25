@@ -11,6 +11,14 @@ define("NavCredit1Page", [], function() {
 					"masterColumn": "Id",
 					"detailColumn": "NavCredit"
 				}
+			},
+			"NavSchemac2a238c3Detaila892370a": {
+				"schemaName": "NavSchemac2a238c3Detail",
+				"entitySchemaName": "NavCreditAuto",
+				"filter": {
+					"detailColumn": "NavCredit",
+					"masterColumn": "Id"
+				}
 			}
 		}/**SCHEMA_DETAILS*/,
 		businessRules: /**SCHEMA_BUSINESS_RULES*/{
@@ -159,77 +167,79 @@ define("NavCredit1Page", [], function() {
 				"index": 3
 			},
 			{
-				"operation": "insert",
-				"name": "NotesAndFilesTab",
+				"operation": "merge",
+				"name": "ESNTab",
 				"values": {
-					"caption": {
-						"bindTo": "Resources.Strings.NotesAndFilesTabCaption"
-					},
-					"items": [],
 					"order": 0
-				},
-				"parentName": "Tabs",
-				"propertyName": "tabs",
-				"index": 0
+				}
 			},
 			{
 				"operation": "insert",
-				"name": "Files",
+				"name": "NavSchemac2a238c3Detaila892370a",
 				"values": {
-					"itemType": 2
+					"itemType": 2,
+					"markerValue": "added-detail"
 				},
-				"parentName": "NotesAndFilesTab",
-				"propertyName": "items",
-				"index": 0
-			},
-			{
-				"operation": "insert",
-				"name": "NotesControlGroup",
-				"values": {
-					"itemType": 15,
-					"caption": {
-						"bindTo": "Resources.Strings.NotesGroupCaption"
-					},
-					"items": []
-				},
-				"parentName": "NotesAndFilesTab",
+				"parentName": "ESNTab",
 				"propertyName": "items",
 				"index": 1
 			},
 			{
 				"operation": "insert",
-				"name": "Notes",
+				"name": "Tab1b28988bTabLabel",
 				"values": {
-					"bindTo": "NavNotes",
-					"dataValueType": 1,
-					"contentType": 4,
-					"layout": {
-						"column": 0,
-						"row": 0,
-						"colSpan": 24
+					"caption": {
+						"bindTo": "Resources.Strings.Tab1b28988bTabLabelTabCaption"
 					},
-					"labelConfig": {
-						"visible": false
-					},
-					"controlConfig": {
-						"imageLoaded": {
-							"bindTo": "insertImagesToNotes"
-						},
-						"images": {
-							"bindTo": "NotesImagesCollection"
-						}
-					}
+					"items": [],
+					"order": 1
 				},
-				"parentName": "NotesControlGroup",
+				"parentName": "Tabs",
+				"propertyName": "tabs",
+				"index": 1
+			},
+			{
+				"operation": "insert",
+				"name": "Tab1b28988bTabLabelGroup862345ea",
+				"values": {
+					"caption": {
+						"bindTo": "Resources.Strings.Tab1b28988bTabLabelGroup862345eaGroupCaption"
+					},
+					"itemType": 15,
+					"markerValue": "added-group",
+					"items": []
+				},
+				"parentName": "Tab1b28988bTabLabel",
 				"propertyName": "items",
 				"index": 0
 			},
 			{
-				"operation": "merge",
-				"name": "ESNTab",
+				"operation": "insert",
+				"name": "Tab1b28988bTabLabelGridLayout93d76d06",
 				"values": {
-					"order": 1
-				}
+					"itemType": 0,
+					"items": []
+				},
+				"parentName": "Tab1b28988bTabLabelGroup862345ea",
+				"propertyName": "items",
+				"index": 0
+			},
+			{
+				"operation": "insert",
+				"name": "NavCreditPeriod79b56ee7-7caf-4d8f-ae3b-d835d23ad46f",
+				"values": {
+					"layout": {
+						"colSpan": 5,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 0,
+						"layoutName": "Tab1b28988bTabLabelGridLayout93d76d06"
+					},
+					"bindTo": "NavCreditPeriod"
+				},
+				"parentName": "Tab1b28988bTabLabelGridLayout93d76d06",
+				"propertyName": "items",
+				"index": 0
 			}
 		]/**SCHEMA_DIFF*/
 	};

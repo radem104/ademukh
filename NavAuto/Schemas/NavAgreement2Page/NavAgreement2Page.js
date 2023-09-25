@@ -11,7 +11,42 @@ define("NavAgreement2Page", [], function() {
 						columns: ["NavName"]
 					}
 				]			
-			},		
+			},	
+			"NavDateVirtual":{
+				dataValueType: Terrasoft.DataValueType.INTEGER,
+				dependencies: [
+					{
+						columns: ["NavCreditPeriod", "NavDate"],
+						methodName: "checkingDateAgreement"
+					}
+				]
+			},
+			"NavCreditPeriod":{
+				dataValueType: Terrasoft.DataValueType.INTEGER,
+				dependencies: [
+					{
+						columns: ["NavCredit"],
+						methodName: "calculationTermCreditProgram"
+					}
+				]
+			},
+			"NavCredit":{
+				dataValueType: Terrasoft.DataValueType.LOOKUP,
+				lookupListConfig:{
+					
+					columns: [ "NavName", "NavCreditPeriod", "NavRatePerMonth"], 
+					filters: [function()
+					{
+						var filterGroup = Ext.create("Terrasoft.FilterGroup");
+						var auto = this.get('NavAuto');
+						filterGroup.add("Filter", this.Terrasoft.createColumnFilterWithParameter(
+						this.Terrasoft.ComparisonType.EQUAL,
+						"[NavCreditAuto:NavCredit:Id].NavAuto",
+						auto.value));
+						return filterGroup;
+					}]
+				}
+			},
 		},
 		modules: /**SCHEMA_MODULES*/{}/**SCHEMA_MODULES*/,
 		details: /**SCHEMA_DETAILS*/{}/**SCHEMA_DETAILS*/,
@@ -172,9 +207,113 @@ define("NavAgreement2Page", [], function() {
 						}
 					]
 				}
+			},
+			"NavSumma": {
+				"97d2fa73-83d7-4401-8a95-6f61c1340a6d": {
+					"uId": "97d2fa73-83d7-4401-8a95-6f61c1340a6d",
+					"enabled": true,
+					"removed": false,
+					"ruleType": 3,
+					"populatingAttributeSource": {
+						"expression": {
+							"type": 1,
+							"attribute": "NavAuto",
+							"attributePath": "NavAmount"
+						}
+					},
+					"logical": 0,
+					"conditions": [
+						{
+							"comparisonType": 3,
+							"leftExpression": {
+								"type": 1,
+								"attribute": "NavAuto",
+								"attributePath": "NavUsed"
+							},
+							"rightExpression": {
+								"type": 0,
+								"value": true,
+								"dataValueType": 12
+							}
+						}
+					]
+				},
+				"3c840031-697a-4c8f-991f-5ac6f34910c6": {
+					"uId": "3c840031-697a-4c8f-991f-5ac6f34910c6",
+					"enabled": true,
+					"removed": false,
+					"ruleType": 3,
+					"populatingAttributeSource": {
+						"expression": {
+							"type": 1,
+							"attribute": "NavAuto",
+							"attributePath": "NavModel.NavRecommendedAmount"
+						}
+					},
+					"logical": 0,
+					"conditions": [
+						{
+							"comparisonType": 3,
+							"leftExpression": {
+								"type": 1,
+								"attribute": "NavAuto",
+								"attributePath": "NavUsed"
+							},
+							"rightExpression": {
+								"type": 0,
+								"value": false,
+								"dataValueType": 12
+							}
+						}
+					]
+				}
 			}
 		}/**SCHEMA_BUSINESS_RULES*/,
 		methods: { 
+
+			IsAmountSet: function(){
+				var initialFee = this.get("NavInitialFee");
+				var fullCreditAmount = this.get("NavFullCreditAmount");
+				if(!(Ext.isEmpty(initialFee) && Ext.isEmpty(fullCreditAmount))){
+					return true;
+				}
+				else{
+					return false;
+				}
+			},
+
+			onOpenRecalculateTheLoanClick: function(){
+				var creditAmount = this.get("NavCreditAmount");
+				var fullCreditAmount = this.get("NavFullCreditAmount");
+				var resultCreditAmount = fullCreditAmount - this.get("NavInitialFee");
+				var ratePerMonth = this.get("NavRatePerMonth");
+				var resultFullCreditAmount1 = ratePerMonth/100;
+				var resultFullCreditAmount2 = resultFullCreditAmount1*this.get("NavCreditPeriod")*this.get("NavCreditAmount")+this.get("NavCreditAmount");
+				this.set("NavCreditAmount", resultCreditAmount);
+				this.set("NavFullCreditAmount", resultFullCreditAmount2);
+				
+			},
+
+			calculationTermCreditProgram: function(){			
+				var creditPeriod = this.get("NavCredit").NavCreditPeriod;
+				this.set("NavCreditPeriod", creditPeriod);
+			},
+
+			checkingDateAgreement: function(){
+				var invalidMessage = "";
+				var creditPeriod = (this.get("NavCreditPeriod"))*365;
+				var dateAgreement = this.get("NavDate");
+				var currentDate = new Date();
+				var seconds = Math.abs(Math.floor(dateAgreement-currentDate)/1000);
+				var result = Math.floor(seconds/86400);
+				if(result >= creditPeriod){
+					invalidMessage = this.get("Resources.Strings.DateCreditPeriodMessage");
+				}
+				return {
+                    invalidMessage: invalidMessage
+                };
+			},
+
 			checkingField: function(name){
 				var invalidMessage = "";
 				var value = this.get(name);
@@ -195,10 +334,13 @@ define("NavAgreement2Page", [], function() {
                 this.addColumnValidator("NavDate", function() {return this.checkingField("NavDate")});
 				this.addColumnValidator("NavContact",function() {return this.checkingField("NavContact")});
 				this.addColumnValidator("NavAuto", function() {return this.checkingField("NavAuto")});
+				this.addColumnValidator("NavCreditPeriod", this.checkingDateAgreement);
             },
+
 			globalValue: function(value){
 				return result2 = value
 			},
+
 			changingNumber: function() {
 				var strName = "";
                 var name = this.get("NavName");
@@ -245,7 +387,7 @@ define("NavAgreement2Page", [], function() {
 						"layoutName": "ProfileContainer"
 					},
 					"bindTo": "NavDate",
-					"enabled": false
+					"enabled": true
 				},
 				"parentName": "ProfileContainer",
 				"propertyName": "items",
@@ -320,6 +462,27 @@ define("NavAgreement2Page", [], function() {
 				"parentName": "ProfileContainer",
 				"propertyName": "items",
 				"index": 5
+			},
+			{
+				"operation": "insert",
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"name": "NavRecalculateTheLoanButton",
+				"values": {
+					itemType: Terrasoft.ViewItemType.BUTTON,
+					caption: { bindTo: "Resources.Strings.RecalculateTheLoanButton" },
+					click: { bindTo: "onOpenRecalculateTheLoanClick" },
+					enabled: { bindTo: "IsAmountSet"},
+					style: Terrasoft.controls.ButtonEnums.style.BLUE,
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 6,
+					},
+				},
+				
+				"index": 6
 			},
 			{
 				"operation": "insert",
