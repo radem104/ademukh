@@ -246,6 +246,40 @@ define("NavInvoice1Page", [], function() {
 				"index": 4
 			},
 			{
+				"operation": "insert",
+				"name": "NavInvoiceType5f09fff9-33c4-4c4c-b5b6-bacc1907c528",
+				"values": {
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 5,
+						"layoutName": "ProfileContainer"
+					},
+					"bindTo": "NavInvoiceType"
+				},
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"index": 5
+			},
+			{
+				"operation": "insert",
+				"name": "NavPayDate1a0d02b3-a2e7-4662-98f4-476004a56437",
+				"values": {
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 6,
+						"layoutName": "ProfileContainer"
+					},
+					"bindTo": "NavPayDate"
+				},
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"index": 6
+			},
+			{
 				"operation": "merge",
 				"name": "ESNTab",
 				"values": {

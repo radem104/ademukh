@@ -1,4 +1,4 @@
-define("NavAgreement2Page", [], function() {
+define("NavAgreement2Page", ["ServiceHelper"], function(ServiceHelper) {
 	return {
 		entitySchemaName: "NavAgreement",
 		attributes: {
@@ -7,13 +7,14 @@ define("NavAgreement2Page", [], function() {
 				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN,
 				dependencies: [
 					{
-						methodName: "changingNumber",
+						methodName: "storageValue",
 						columns: ["NavName"]
 					}
 				]			
 			},	
 			"NavDateVirtual":{
 				dataValueType: Terrasoft.DataValueType.INTEGER,
+				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN,
 				dependencies: [
 					{
 						columns: ["NavCreditPeriod", "NavDate"],
@@ -271,6 +272,27 @@ define("NavAgreement2Page", [], function() {
 		}/**SCHEMA_BUSINESS_RULES*/,
 		methods: { 
 
+			isAgreementNameSet: function(){
+				return this.get("NavName") ? true : false;
+			},
+
+			onGetServiceInfoClick: function(){
+				var id = this.get("Id");
+				var serviceData = { 
+                    Id: id
+                };
+				ServiceHelper.callService("NavAgreementExtractService", "GetInfoAgreementById",
+                    function(response) {
+                        var result = response.GetInfoAgreementByIdResult;
+						var blob = new Blob(JSON.stringify(result), {type: 'application/json'});
+						saveAs(blob, "выписка.txt");
+						if(saveAs == true){
+							this.showInformationDialog("файл создан");
+						}                      
+                    }, serviceData, this);
+					
+            },
+
 			IsAmountSet: function(){
 				var initialFee = this.get("NavInitialFee");
 				var fullCreditAmount = this.get("NavFullCreditAmount");
@@ -281,7 +303,7 @@ define("NavAgreement2Page", [], function() {
 					return false;
 				}
 			},
-
+			
 			onOpenRecalculateTheLoanClick: function(){
 				var creditAmount = this.get("NavCreditAmount");
 				var fullCreditAmount = this.get("NavFullCreditAmount");
@@ -298,7 +320,7 @@ define("NavAgreement2Page", [], function() {
 				var creditPeriod = this.get("NavCredit").NavCreditPeriod;
 				this.set("NavCreditPeriod", creditPeriod);
 			},
-
+			 
 			checkingDateAgreement: function(){
 				var invalidMessage = "";
 				var creditPeriod = (this.get("NavCreditPeriod"))*365;
@@ -336,26 +358,28 @@ define("NavAgreement2Page", [], function() {
 				this.addColumnValidator("NavAuto", function() {return this.checkingField("NavAuto")});
 				this.addColumnValidator("NavCreditPeriod", this.checkingDateAgreement);
             },
-
-			globalValue: function(value){
-				return result2 = value
+			
+			/**storageValue: function(value){
+				var resultName = value;
+				if(this.get("NavName") != resultName){
+					this.changingNumber();
+				}
+				else{
+					return;
+				}
 			},
-
+			
 			changingNumber: function() {
 				var strName = "";
                 var name = this.get("NavName");
-				var result1 = this.globalValue();
-				if(!Ext.isEmpty(name)){
-                
-                strName = String(name);
-				if(result1 != name){
-				result1 = strName.replace(/[а-яА-Яa-zA-Z]/gi , '-');	
-				}			                                        			
-			}
-				this.globalValue(result1);
-				this.set("NavName", result1);	
-				
-	}},
+				if(!Ext.isEmpty(name)){               
+                strName = String(name);				
+				var result1 = strName.replace(/[а-яА-Яa-zA-Z]/gi , '-');						                                        			
+				}
+				this.set("NavName", result1);
+				this.storageValue(result1);	
+						
+			}*/},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
 			{
@@ -483,6 +507,27 @@ define("NavAgreement2Page", [], function() {
 				},
 				
 				"index": 6
+			},
+			{
+				"operation": "insert",
+				"parentName": "ProfileContainer",
+				"propertyName": "items",
+				"name": "GetServiceInfoButton",
+				"values": {
+					itemType: Terrasoft.ViewItemType.BUTTON,
+					caption: { bindTo: "Resources.Strings.GetServiceInfoButtonCaption" },
+					click: { bindTo: "onGetServiceInfoClick" },
+					enabled: { bindTo: "isAgreementNameSet"},
+					style: Terrasoft.controls.ButtonEnums.style.BLUE,
+					"layout": {
+						"colSpan": 24,
+						"rowSpan": 1,
+						"column": 0,
+						"row": 7,
+					},
+				},
+				
+				"index": 7
 			},
 			{
 				"operation": "insert",
