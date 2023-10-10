@@ -284,11 +284,19 @@ define("NavAgreement2Page", ["ServiceHelper"], function(ServiceHelper) {
 				ServiceHelper.callService("NavAgreementExtractService", "GetInfoAgreementById",
                     function(response) {
                         var result = response.GetInfoAgreementByIdResult;
-						var blob = new Blob(JSON.stringify(result), {type: 'application/json'});
-						saveAs(blob, "выписка.txt");
-						if(saveAs == true){
-							this.showInformationDialog("файл создан");
-						}                      
+						var blob = new Blob([result], {type: 'application/json'});
+						var link = document.createElement('a');
+						//link.href = window.URL.createObjectURL(blob);
+						//var fileName = "Высписка данных по договору";
+						link.download = 'Высписка данных по договору';
+						let reader = new FileReader();
+						reader.readAsDataURL(blob);
+						//link.click();
+						reader.onload = function() {
+							link.href = reader.result;
+							link.click();
+						  };
+						this.showInformationDialog("файл создан");                   
                     }, serviceData, this);
 					
             },
