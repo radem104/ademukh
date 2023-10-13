@@ -1,0 +1,28 @@
+﻿{
+  "MetaData": {
+    "Schema": {
+      "ManagerName": "ProcessUserTaskSchemaManager",
+      "UId": "3989ded4-e6f7-4580-939d-1f79474b57b0",
+      "A2": "NavAgreementProcessUserTask",
+      "A5": "a97974eb-06c4-4898-9412-b17c7e2298f5",
+      "B1": [],
+      "B2": [],
+      "B3": [],
+      "B6": "33754995-d6d7-9142-41a4-c2b12315c07a",
+      "B8": "7.18.5.1500",
+      "FJ1": [
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "07e1ce5d-f367-f33d-0fcb-8d7ac3266ddf",
+          "A2": "NavEmail",
+          "A3": "3989ded4-e6f7-4580-939d-1f79474b57b0",
+          "A4": "3989ded4-e6f7-4580-939d-1f79474b57b0",
+          "L1": "8b3f29bb-ea14-4ce5-a5c5-293a929b6ba2",
+          "L8": {}
+        }
+      ],
+      "FK12": "#839DC3",
+      "FK16": true
+    }
+  }
+}

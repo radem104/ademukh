@@ -1,0 +1,10 @@
+﻿{
+  "Descriptor": {
+    "UId": "3989ded4-e6f7-4580-939d-1f79474b57b0",
+    "Name": "NavAgreementProcessUserTask",
+    "ModifiedOnUtc": "\/Date(1697183831000)\/",
+    "ManagerName": "ProcessUserTaskSchemaManager",
+    "Caption": "NavAgreementProcessUserTask",
+    "DependsOn": []
+  }
+}
