@@ -1,0 +1,9 @@
+﻿{
+  "Descriptor": {
+    "UId": "b0265856-fd6e-4476-8613-0a26519635e2",
+    "Name": "NavProcessPaymentScheduleUserTask",
+    "ModifiedOnUtc": "\/Date(1697731521000)\/",
+    "ManagerName": "ProcessUserTaskSchemaManager",
+    "Caption": "NavProcessPaymentScheduleUserTask"
+  }
+}

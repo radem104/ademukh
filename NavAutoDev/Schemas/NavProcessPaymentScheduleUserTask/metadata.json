@@ -1,0 +1,73 @@
+﻿{
+  "MetaData": {
+    "Schema": {
+      "ManagerName": "ProcessUserTaskSchemaManager",
+      "UId": "b0265856-fd6e-4476-8613-0a26519635e2",
+      "A2": "NavProcessPaymentScheduleUserTask",
+      "A5": "a97974eb-06c4-4898-9412-b17c7e2298f5",
+      "B1": [],
+      "B2": [],
+      "B3": [],
+      "B6": "33754995-d6d7-9142-41a4-c2b12315c07a",
+      "B8": "7.18.5.1500",
+      "FJ1": [
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "b4241612-9271-47ec-85b0-aae3a099e1ae",
+          "A2": "AgreementId",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "23018567-a13c-4320-8687-fd6f9e3699bd",
+          "L8": {}
+        },
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "a0f59269-88d8-d331-f1ef-d479107b5b38",
+          "A2": "NavCreditAmount",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "5cc8060d-6d10-4773-89fc-8c12d6f659a6",
+          "L8": {}
+        },
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "996c597e-8e9b-efa5-ecfb-32c709302408",
+          "A2": "NavCreditPeriod",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "6b6b74e2-820d-490e-a017-2b73d4ccf2b0",
+          "L8": {}
+        },
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "737d39f7-e114-255b-0c85-639883ace902",
+          "A2": "NavDate",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "603d4960-a1a2-45e9-b232-206a54421b01",
+          "L8": {}
+        },
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "1283779f-49f9-dfe7-a5eb-f2019272cbeb",
+          "A2": "TypeInvoice",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "b295071f-7ea9-4e62-8d1a-919bf3732ff2",
+          "L8": {}
+        },
+        {
+          "BL1": "Terrasoft.Core.Process.ProcessSchemaParameter",
+          "UId": "2a783642-df22-d99c-b207-e37e2d8ed1ac",
+          "A2": "NavName",
+          "A3": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "A4": "b0265856-fd6e-4476-8613-0a26519635e2",
+          "L1": "8b3f29bb-ea14-4ce5-a5c5-293a929b6ba2",
+          "L8": {}
+        }
+      ],
+      "FK12": "#839DC3",
+      "FK16": true
+    }
+  }
+}

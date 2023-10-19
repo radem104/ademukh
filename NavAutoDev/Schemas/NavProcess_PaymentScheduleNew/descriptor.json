@@ -1,0 +1,9 @@
+﻿{
+  "Descriptor": {
+    "UId": "d7e83de0-393e-46f4-9822-4dfa6a65be7c",
+    "Name": "NavProcess_PaymentScheduleNew",
+    "ModifiedOnUtc": "\/Date(1697731733000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "График платежей"
+  }
+}
